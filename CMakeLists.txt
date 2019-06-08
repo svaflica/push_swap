@@ -91,4 +91,4 @@ add_executable(pu_swa
         src/ft_comm.c
         src/ft_is_arg_valid.c
         src/ft_pair_stack.c
-        src/ft_stack.c src/ft_is_sorted.c src/push_swap/ft_sort.c src/ft_comm_go.c src/find_max_min_med.c src/ft_comm2.c src/ft_stack2.c)
+        src/ft_stack.c src/ft_is_sorted.c src/push_swap/ft_sort.c src/ft_comm_go.c src/find_max_min_med.c src/ft_comm2.c src/ft_stack2.c src/checker/ft_read.c)

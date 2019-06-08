@@ -12,93 +12,53 @@
 
 #include "../../inc/push_swap.h"
 
-static int 	ft_check_readed(char *str)
+static int		ft_stack_full(t_pair_stack **p, char **v, int c)
 {
-	if (!str)
-		return (1);
-	if (*str == '\n')
-		return (0);
-	while (*str)
+	int cou;
+
+	while (--c)
 	{
-		if (*str == '\n' && *(str + 1) == '\n')
+		cou = ft_atoi(v[c]);
+		if ((cou == -1 && ft_strcmp(v[c], "-1") != 0) ||
+			(cou == 0 && ft_strcmp(v[c], "0") != 0) ||
+			ft_is_in_stack((*p)->a, cou))
+		{
+			ft_stack_del(&((*p)->a));
+			ft_stack_del(&((*p)->b));
+			ft_memdel((void **)p);
+			write(1, "Error\n", 6);
 			return (0);
-		str++;
+		}
+		else
+			ft_stack_push(&((*p)->a), ft_stack_new(cou));
 	}
-	if (*(str - 1) != '\n')
-		return (0);
-	else
-		return (1);
+	return (1);
 }
 
-static char	**ft_read(t_pair_stack *p, char *name)
+static void		ft_for_file(char **name, char *v, int *c)
 {
-	char		*str;
-	char		*buf;
-	char 		*tmp;
-	char 		**res;
-	int 		fd;
-
-	fd = 0;
-	if (name)
-		if ((fd = open(name, O_RDONLY)) < 0 || read(fd, NULL, 0) == -1)
-			return (NULL);
-	if (!(buf = ft_strnew(100000)))
-	{
-		ft_stack_del(&(p->a));
-		ft_stack_del(&(p->b));
-		return (NULL);
-	}
-	str = NULL;
-	while (read(fd, buf, 100000))
-	{
-		tmp = str;
-		str = ft_strjoin(str, buf);
-		tmp ? ft_strdel(&tmp) : NULL;
-	}
-	fd > 0 ? close(fd) : 0;
-	if (!ft_check_readed(str))
-		res = ft_strsplit("fuck\n", '\n');
-	else
-		res = ft_strsplit(str, '\n');
-	ft_strdel(&buf);
-	ft_strdel(&str);
-	return (res);
+	*name = v;
+	*c -= 2;
 }
 
-int		main(int c, char **v)
+int				main(int c, char **v)
 {
 	t_pair_stack	*p;
 	int				cou;
-	char 			*name;
+	char			*name;
 
 	if (c == 1)
 		return (-1);
 	name = NULL;
 	if (!ft_strcmp(v[1], "-f"))
 	{
-		name = v[2];
+		ft_for_file(&name, v[2], &c);
 		v += 2;
-		c -= 2;
 	}
-	if (!ft_is_arg_valid(v + 1))
-		return(write(1, "Error\n", 6));
-	else if (!(p = ft_pair_stack_new()))
-		return(write(1, "Error\n", 6));
-	while (--c)
-	{
-		cou = ft_atoi(v[c]);
-		if ((cou == -1 && ft_strcmp(v[c], "-1") != 0) ||
-			(cou == 0 && ft_strcmp(v[c], "0") != 0) ||
-			ft_is_in_stack(p->a, cou))
-		{
-			ft_stack_del(&(p->a));
-			ft_stack_del(&(p->b));
-			ft_memdel((void **)&p);
-			return (write(1, "Error\n", 6));
-		}
-		else
-			ft_stack_push(&(p->a), ft_stack_new(cou));
-	}
+	if (!(ft_is_arg_valid(v + 1) && (p = ft_pair_stack_new()) && c != 1))
+		return (write(1, "Error\n", 6));
+	if (!ft_stack_full(&p, v, c))
+		return (0);
 	cou = checker(p->a, p->b, ft_read(p, name));
 	if (cou == 1)
 		write(1, "OK\n", 3);

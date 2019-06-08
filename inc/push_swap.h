@@ -54,6 +54,9 @@ void				ft_bitch_sort(t_pair_stack *pe, int max, int min,
 int					checker(t_stack *a, t_stack *b, char **str);
 int					ft_is_arg_valid(char **arg);
 
+int					ft_check_readed(char *str);
+char				**ft_read(t_pair_stack *p, char *name);
+
 void				s(t_stack *a);
 void				ss(t_stack *a, t_stack *b);
 void				p(t_stack **a, t_stack **b);

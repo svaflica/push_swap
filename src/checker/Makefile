@@ -9,7 +9,8 @@ SRC = \
 		../ft_pair_stack.c \
 		../ft_is_sorted.c \
 		../ft_comm2.c \
-		../ft_stack2.c
+		../ft_stack2.c \
+		ft_read.c
 OBJ = $(SRC:.c=.o)
 INC1 = ../../inc
 INC2 = ../../libft
