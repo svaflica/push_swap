@@ -39,3 +39,8 @@ void			p(t_stack **a, t_stack **b)
 	if (b && *b)
 		ft_stack_push(a, ft_stack_new(ft_stack_pop(b)));
 }
+
+int				ft_abs(int a)
+{
+	return (a < 0 ? -a : a);
+}

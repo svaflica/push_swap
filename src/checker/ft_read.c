@@ -12,7 +12,7 @@
 
 #include "../../inc/push_swap.h"
 
-int			ft_check_readed(char *str)
+int					ft_check_readed(char *str)
 {
 	if (!str)
 		return (1);
@@ -30,7 +30,7 @@ int			ft_check_readed(char *str)
 		return (1);
 }
 
-char		**ft_check(char **str)
+static char			**ft_check(char **str)
 {
 	char **res;
 
@@ -42,7 +42,14 @@ char		**ft_check(char **str)
 	return (res);
 }
 
-char		**ft_read(t_pair_stack *p, char *name)
+static char			**ft_dele(t_stack **a, t_stack **b)
+{
+	ft_stack_del(a);
+	ft_stack_del(b);
+	return (NULL);
+}
+
+char				**ft_read(t_pair_stack *p, char *name)
 {
 	char		*str;
 	char		*buf;
@@ -54,11 +61,7 @@ char		**ft_read(t_pair_stack *p, char *name)
 		if ((fd = open(name, O_RDONLY)) < 0 || read(fd, NULL, 0) == -1)
 			return (NULL);
 	if (!(buf = ft_strnew(10000)))
-	{
-		ft_stack_del(&(p->a));
-		ft_stack_del(&(p->b));
-		return (NULL);
-	}
+		return (ft_dele(&(p->a), (&p->b)));
 	str = NULL;
 	while (read(fd, buf, 10000))
 	{
@@ -67,7 +70,6 @@ char		**ft_read(t_pair_stack *p, char *name)
 		tmp ? ft_strdel(&tmp) : NULL;
 		ft_bzero(buf, 10000);
 	}
-	ft_printf("%s\n", buf);
 	fd > 0 ? close(fd) : 0;
 	ft_strdel(&buf);
 	return (ft_check(&str));

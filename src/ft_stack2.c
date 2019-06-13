@@ -69,3 +69,13 @@ void			ft_stacks_print(t_stack *a, t_stack *b)
 		tmp_b = tmp_b->next;
 	}
 }
+
+t_stack			*ft_stack_last(t_stack *a)
+{
+	t_stack *tmp;
+
+	tmp = a;
+	while (tmp->next)
+		tmp = tmp->next;
+	return (tmp);
+}

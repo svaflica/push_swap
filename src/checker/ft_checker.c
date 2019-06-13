@@ -52,6 +52,31 @@ static int		ft_find_comm(t_stack **a, t_stack **b, char *str)
 	return (1);
 }
 
+static void		ft_print_beg(t_stack *a, t_stack *b, int deb, int *res)
+{
+	*res = 1;
+	if (deb)
+	{
+		while (read(1, NULL, 5) == 1)
+			NULL;
+		ft_printf("\nBEGIN DEBUG\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+		ft_stacks_print(a, b);
+		ft_printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+	}
+}
+
+static void		ft_print_st(t_stack *a, t_stack *b, char *str, int deb)
+{
+	if (deb)
+	{
+		while (read(1, NULL, 5) == 1)
+			NULL;
+		ft_printf("\n%s@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n", *str);
+		ft_stacks_print(a, b);
+		ft_printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+	}
+}
+
 int				checker(t_stack *a, t_stack *b, char **str, int deb)
 {
 	char	**tmp;
@@ -60,12 +85,7 @@ int				checker(t_stack *a, t_stack *b, char **str, int deb)
 	if (str == NULL)
 		return (ft_is_sorted(&a));
 	tmp = str;
-	if (deb)
-	{
-		ft_printf("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\nBegin debag\n");
-		ft_stacks_print(a, b);
-		ft_printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
-	}
+	ft_print_beg(a, b, deb, &res);
 	while (*tmp)
 	{
 		if (ft_find_comm(&a, &b, *tmp) == -1)
@@ -75,17 +95,9 @@ int				checker(t_stack *a, t_stack *b, char **str, int deb)
 			ft_pstrdel((void **)str);
 			return (-1);
 		}
-		if (deb)
-		{
-			while (read(1, NULL, 5) == 1)
-				NULL;
-			ft_printf("\n%s@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n", *tmp);
-			ft_stacks_print(a, b);
-			ft_printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
-		}
+		ft_print_st(a, b, *tmp, deb);
 		tmp++;
 	}
-	res = 1;
 	if (b || !ft_is_sorted(&a))
 		res = 0;
 	a != NULL ? ft_stack_del(&a) : NULL;

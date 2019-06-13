@@ -28,12 +28,6 @@ int		ft_atoi(const char *str)
 		str++;
 	while ('0' <= *str && *str <= '9')
 	{
-//		if ((res > 2147483647 || (res == 2147483647 && (*str - '0') > 7)) &&
-//				sign == 1)
-//			return (-1);
-//		else if ((res > MAX_INT || (res == MAX_INT && (*str - '0') > 8)) &&
-//				sign == -1)
-//			return (0);
 		res = 10 * res + (int)(*str - '0');
 		if (res > 2147483647 && sign == 1)
 			return (-1);

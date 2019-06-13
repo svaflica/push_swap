@@ -64,11 +64,6 @@ void			ft_comm_go(t_stack **sol)
 			a = 0;
 	}
 	if (!a && (*sol)->num == 1)
-	{
 		write(1, "sa\n", 3);
-		ft_comm_go(&((*sol)->next));
-		ft_memdel((void **)sol);
-	}
-	else
-		ft_comm_go2(sol, a);
+	ft_comm_go2(sol, a);
 }

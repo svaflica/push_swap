@@ -10,8 +10,9 @@ SRC = \
 		../ft_is_sorted.c \
 		../ft_comm_go.c \
 		../ft_comm2.c \
-		../find_max_min_med.c \
-		../ft_stack2.c
+		../ft_stack2.c \
+		ft_sort_helper2.c \
+		sort_helper.c
 OBJ = $(SRC:.c=.o)
 INC1 = ../../inc
 INC2 = ../../libft

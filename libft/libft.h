@@ -83,7 +83,7 @@ char				*ft_strstr(const char *haystack, const char *needle);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strtrim(char const *s);
 
-//void				ft_putchar(char c);
+void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putchar_fd(char c, int fd);
