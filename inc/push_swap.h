@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include "../ft_printf/inc/printf.h"
 # include "../libft/libft.h"
 
 typedef struct		s_stack
@@ -31,6 +32,8 @@ typedef struct		s_pair_stack
 {
 	t_stack			*a;
 	t_stack			*b;
+	int				size_a;
+	int				size_b;
 }					t_pair_stack;
 
 t_pair_stack		*ft_pair_stack_new(void);
@@ -42,16 +45,15 @@ int					ft_stack_push(t_stack **beg, t_stack *s);
 int					ft_stack_push_b(t_stack **beg, t_stack *s);
 int					ft_stack_pop(t_stack **s);
 void				ft_stack_del(t_stack **s);
-void				ft_stack_print(t_stack *a);
+void				ft_stacks_print(t_stack *a, t_stack *b);
 int					ft_is_in_stack(t_stack *a, int num);
 
 int					ft_is_sorted(t_stack **a);
 
 void				ft_sort(t_pair_stack *pe, double med, t_stack **sol);
-void				ft_bitch_sort(t_pair_stack *pe, int max, int min,
-									double med, t_stack **sol);
+void				ft_bitch_sort(t_pair_stack *pe, t_stack **sol);
 
-int					checker(t_stack *a, t_stack *b, char **str);
+int					checker(t_stack *a, t_stack *b, char **str, int deb);
 int					ft_is_arg_valid(char **arg);
 
 int					ft_check_readed(char *str);
@@ -61,9 +63,9 @@ void				s(t_stack *a);
 void				ss(t_stack *a, t_stack *b);
 void				p(t_stack **a, t_stack **b);
 void				r(t_stack **a);
-void				rr(t_stack *a, t_stack *b);
+void				rr(t_stack **a, t_stack **b);
 void				rr_f(t_stack **a);
-void				rrr(t_stack *a, t_stack *b);
+void				rrr(t_stack **a, t_stack **b);
 
 double				ft_find_median(char **v, int len);
 int					ft_find_min(t_stack *a);

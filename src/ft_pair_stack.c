@@ -20,5 +20,7 @@ t_pair_stack			*ft_pair_stack_new(void)
 		return (NULL);
 	p->a = NULL;
 	p->b = NULL;
+	p->size_a = 0;
+	p->size_b = 0;
 	return (p);
 }

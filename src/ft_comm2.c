@@ -27,10 +27,10 @@ void			r(t_stack **a)
 	tmp->prev = tmp2;
 }
 
-void			rr(t_stack *a, t_stack *b)
+void			rr(t_stack **a, t_stack **b)
 {
-	r(&a);
-	r(&b);
+	r(a);
+	r(b);
 }
 
 void			rr_f(t_stack **a)
@@ -49,8 +49,8 @@ void			rr_f(t_stack **a)
 		pr_tmp->next = NULL;
 }
 
-void			rrr(t_stack *a, t_stack *b)
+void			rrr(t_stack **a, t_stack **b)
 {
-	rr_f(&a);
-	rr_f(&b);
+	rr_f(a);
+	rr_f(b);
 }

@@ -21,7 +21,7 @@ FLAGS = -Wall -Wextra -Werror
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	$(CC) -o $(NAME) -I $(INC2) -L ../../libft/ -lft $(OBJ)
+	$(CC) -o $(NAME) -I $(INC2) -L ../../libft/ -lft $(OBJ) ../../ft_printf/libftprintf.a
 
 %.o: src/%.c
 	@$(CC) $(FLAGS) -g -I $(INC1) -o $@ -c $<

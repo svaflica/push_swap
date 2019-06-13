@@ -45,14 +45,27 @@ int				ft_stack_push_b(t_stack **beg, t_stack *s)
 	return (1);
 }
 
-void			ft_stack_print(t_stack *a)
+void			ft_stacks_print(t_stack *a, t_stack *b)
 {
 	t_stack		*tmp;
+	t_stack		*tmp_b;
 
 	tmp = a;
+	tmp_b = b;
+	while (tmp && tmp_b)
+	{
+		ft_printf("%-10d%10d\n", tmp->num, tmp_b->num);
+		tmp = tmp->next;
+		tmp_b = tmp_b->next;
+	}
 	while (tmp)
 	{
-		printf("%d\n", tmp->num);
+		ft_printf("%-10d\n", tmp->num);
 		tmp = tmp->next;
+	}
+	while (tmp_b)
+	{
+		ft_printf("%-10c%10d\n", ' ', tmp_b->num);
+		tmp_b = tmp_b->next;
 	}
 }

@@ -17,13 +17,13 @@ static int		ft_find_comm2(t_stack **a, t_stack **b, char *str)
 	if (!ft_strcmp(str, "rb"))
 		r(b);
 	else if (!ft_strcmp(str, "rr"))
-		rr(*a, *b);
+		rr(a, b);
 	else if (!ft_strcmp(str, "rra"))
 		rr_f(a);
 	else if (!ft_strcmp(str, "rrb"))
 		rr_f(b);
 	else if (!ft_strcmp(str, "rrr"))
-		rrr(*a, *b);
+		rrr(a, b);
 	else
 	{
 		*a != NULL ? ft_stack_del(a) : NULL;
@@ -52,7 +52,7 @@ static int		ft_find_comm(t_stack **a, t_stack **b, char *str)
 	return (1);
 }
 
-int				checker(t_stack *a, t_stack *b, char **str)
+int				checker(t_stack *a, t_stack *b, char **str, int deb)
 {
 	char	**tmp;
 	int		res;
@@ -60,6 +60,12 @@ int				checker(t_stack *a, t_stack *b, char **str)
 	if (str == NULL)
 		return (ft_is_sorted(&a));
 	tmp = str;
+	if (deb)
+	{
+		ft_printf("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\nBegin debag\n");
+		ft_stacks_print(a, b);
+		ft_printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+	}
 	while (*tmp)
 	{
 		if (ft_find_comm(&a, &b, *tmp) == -1)
@@ -68,6 +74,14 @@ int				checker(t_stack *a, t_stack *b, char **str)
 			b != NULL ? ft_stack_del(&b) : NULL;
 			ft_pstrdel((void **)str);
 			return (-1);
+		}
+		if (deb)
+		{
+			while (read(1, NULL, 5) == 1)
+				NULL;
+			ft_printf("\n%s@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n", *tmp);
+			ft_stacks_print(a, b);
+			ft_printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
 		}
 		tmp++;
 	}

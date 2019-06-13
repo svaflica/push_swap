@@ -45,21 +45,40 @@ int				main(int c, char **v)
 {
 	t_pair_stack	*p;
 	int				cou;
+	int 			deb;
 	char			*name;
 
 	if (c == 1)
 		return (-1);
 	name = NULL;
+	deb = 0;
 	if (!ft_strcmp(v[1], "-f"))
 	{
 		ft_for_file(&name, v[2], &c);
 		v += 2;
 	}
+	else if (!ft_strcmp(v[1], "-d"))
+	{
+		deb = 1;
+		c--;
+		v += 1;
+	}
+	if (!ft_strcmp(v[1], "-f"))
+	{
+		ft_for_file(&name, v[2], &c);
+		v += 2;
+	}
+	else if (!ft_strcmp(v[1], "-d"))
+	{
+		deb = 1;
+		c--;
+		v += 1;
+	}
 	if (!(ft_is_arg_valid(v + 1) && (p = ft_pair_stack_new()) && c != 1))
 		return (write(1, "Error\n", 6));
 	if (!ft_stack_full(&p, v, c))
 		return (0);
-	cou = checker(p->a, p->b, ft_read(p, name));
+	cou = checker(p->a, p->b, ft_read(p, name), deb);
 	if (cou == 1)
 		write(1, "OK\n", 3);
 	else if (cou == 0)

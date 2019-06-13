@@ -53,19 +53,21 @@ char		**ft_read(t_pair_stack *p, char *name)
 	if (name)
 		if ((fd = open(name, O_RDONLY)) < 0 || read(fd, NULL, 0) == -1)
 			return (NULL);
-	if (!(buf = ft_strnew(100000)))
+	if (!(buf = ft_strnew(10000)))
 	{
 		ft_stack_del(&(p->a));
 		ft_stack_del(&(p->b));
 		return (NULL);
 	}
 	str = NULL;
-	while (read(fd, buf, 100000))
+	while (read(fd, buf, 10000))
 	{
 		tmp = str;
 		str = ft_strjoin(str, buf);
 		tmp ? ft_strdel(&tmp) : NULL;
+		ft_bzero(buf, 10000);
 	}
+	ft_printf("%s\n", buf);
 	fd > 0 ? close(fd) : 0;
 	ft_strdel(&buf);
 	return (ft_check(&str));

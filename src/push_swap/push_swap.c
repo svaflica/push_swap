@@ -39,7 +39,6 @@ int				main(int c, char **v)
 {
 	t_pair_stack	*p;
 	t_stack			*sol;
-	int				len;
 
 	if (c == 1)
 		return (-1);
@@ -49,9 +48,9 @@ int				main(int c, char **v)
 	if (!ft_stack_full(&p, v, c))
 		return (0);
 	c--;
-	c > 5 ? ft_bitch_sort(p, ft_find_max(p->a), ft_find_min(p->a),
-			ft_find_median(v + 1, c), &sol) :
-			ft_sort(p, ft_find_median(v + 1, c), &sol);
+	p->size_b = 0;
+	p->size_a = c;
+	ft_bitch_sort(p, &sol);
 	ft_stack_del(&(p->a));
 	p->b ? ft_stack_del(&(p->b)) : NULL;
 	ft_memdel((void **)&p);
