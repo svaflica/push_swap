@@ -12,25 +12,77 @@
 
 #include "../../inc/push_swap.h"
 
+static void		ft_skip_ws(char *v, int *len)
+{
+	while (v[*len] == ' ' && *len)
+		(*len)--;
+}
+
+static int		is_val(char *v, int val)
+{
+	while (*v == ' ')
+		v++;
+	if (val == -1)
+	{
+		if (*v == '-' && *(v + 1) == '1' && (*(v + 2) == ' ' || *(v + 2) == 0))
+			return (1);
+		return (0);
+	}
+	if (*v == '0' && (*(v + 1) == ' ' || *(v + 1) == 0))
+		return (1);
+	return (0);
+}
+
+static void		ft_skip_num(char *v, int *len)
+{
+	while (v[*len] == ' ' && *len)
+		(*len)--;
+	while ((*len))
+	{
+		if (!(ft_isdigit(v[*len]) || v[*len] == '-' || v[*len] == '+'))
+			break;
+		(*len)--;
+	}
+}
+
 static int		ft_stack_full(t_pair_stack **p, char **v, int c)
 {
 	int cou;
+	int len;
 
 	while (--c)
 	{
-		cou = ft_atoi(v[c]);
-		if ((cou == -1 && ft_strcmp(v[c], "-1") != 0) ||
-			(cou == 0 && ft_strcmp(v[c], "0") != 0) ||
-			ft_is_in_stack((*p)->a, cou))
+		len = ft_strlen(v[c]) - 1;
+		while (len > 0)
 		{
-			ft_stack_del(&((*p)->a));
-			ft_stack_del(&((*p)->b));
-			ft_memdel((void **)p);
-			write(1, "Error\n", 6);
-			return (0);
+			ft_skip_num(v[c], &len);
+			cou = ft_atoi(&v[c][len]);
+			if ((cou == -1 && !is_val(&v[c][len], cou)) ||
+				(cou == 0 && !is_val(&v[c][len], cou)) ||
+				ft_is_in_stack((*p)->a, cou))
+			{
+				ft_stack_del(&((*p)->a));
+				ft_stack_del(&((*p)->b));
+				ft_memdel((void **) p);
+				write(1, "Error\n", 6);
+				return (0);
+			}
+			else
+				ft_stack_push(&((*p)->a), ft_stack_new(cou));
+			ft_skip_ws(v[c], &len);
 		}
-		else
-			ft_stack_push(&((*p)->a), ft_stack_new(cou));
+		if (ft_isdigit(v[c][len]) && (v[c][len + 1] == ' ' || v[c][len + 1] == 0))
+		{
+			cou = ft_atoi(v[c]);
+			if (ft_is_in_stack((*p)->a, cou)) {
+				ft_stack_del(&((*p)->a));
+				ft_stack_del(&((*p)->b));
+				ft_memdel((void **) p);
+				write(1, "Error\n", 6);
+				return (0);
+			} else
+				ft_stack_push(&((*p)->a), ft_stack_new(cou));
+		}
 	}
 	return (1);
 }

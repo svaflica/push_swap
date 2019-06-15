@@ -29,7 +29,13 @@ int		ft_is_arg_valid(char **arg)
 		}
 		while (*tmp2)
 		{
-			if (!ft_isdigit(*tmp2))
+			if ((*tmp2 == '-' || *tmp2 == '+') && !ft_isdigit(*(tmp2 - 1)))
+			{
+				tmp2++;
+				if (!ft_isdigit(*tmp2))
+					return (0);
+			}
+			else if (!ft_isdigit(*tmp2) && *tmp2 != ' ')
 				return (0);
 			tmp2++;
 		}

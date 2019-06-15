@@ -12,7 +12,8 @@ SRC = \
 		../ft_comm2.c \
 		../ft_stack2.c \
 		ft_sort_helper2.c \
-		sort_helper.c
+		sort_helper.c \
+		ft_sort_helper3.c
 OBJ = $(SRC:.c=.o)
 INC1 = ../../inc
 INC2 = ../../libft
@@ -26,7 +27,7 @@ $(NAME) : $(OBJ)
 	$(CC) -o $(NAME) -I $(INC2) -L ../../libft/ -lft $(OBJ) ../../ft_printf/libftprintf.a
 
 %.o: src/%.c
-	@$(CC) $(FLAGS) -g -I $(INC1) -o $@ -c $<
+	@$(CC) $(FLAGS) -I $(INC1) -o $@ -c $<
 
 clean :
 	@rm -f $(OBJ)

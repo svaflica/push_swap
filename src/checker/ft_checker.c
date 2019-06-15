@@ -71,7 +71,7 @@ static void		ft_print_st(t_stack *a, t_stack *b, char *str, int deb)
 	{
 		while (read(1, NULL, 5) == 1)
 			NULL;
-		ft_printf("\n%s@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n", *str);
+		ft_printf("\n%s@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n", str);
 		ft_stacks_print(a, b);
 		ft_printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
 	}
@@ -92,7 +92,7 @@ int				checker(t_stack *a, t_stack *b, char **str, int deb)
 		{
 			a != NULL ? ft_stack_del(&a) : NULL;
 			b != NULL ? ft_stack_del(&b) : NULL;
-			ft_pstrdel((void **)str);
+			ft_pstrdel((void **) str);
 			return (-1);
 		}
 		ft_print_st(a, b, *tmp, deb);
