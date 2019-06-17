@@ -69,7 +69,7 @@ static void		ft_print_st(t_stack *a, t_stack *b, char *str, int deb)
 {
 	if (deb)
 	{
-		while (read(1, NULL, 5) == 1)
+		while (read(1, NULL, 1) == 1)
 			NULL;
 		ft_printf("\n%s@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n", str);
 		ft_stacks_print(a, b);
@@ -77,33 +77,29 @@ static void		ft_print_st(t_stack *a, t_stack *b, char *str, int deb)
 	}
 }
 
-int				checker(t_stack *a, t_stack *b, char **str, int deb)
+int				checker(t_stack **a, t_stack **b, char **str, int deb)
 {
 	char	**tmp;
 	int		res;
 
 	if (str == NULL)
-		return (ft_is_sorted(&a));
+		return (ft_is_sorted(a));
 	tmp = str;
-	ft_print_beg(a, b, deb, &res);
+	ft_print_beg(*a, *b, deb, &res);
 	while (*tmp)
 	{
-		if (ft_find_comm(&a, &b, *tmp) == -1)
+		if (ft_find_comm(a, b, *tmp) == -1)
 		{
-			a != NULL ? ft_stack_del(&a) : NULL;
-			b != NULL ? ft_stack_del(&b) : NULL;
-			ft_pstrdel((void **) str);
+			ft_delet(a, b, str);
 			free(str);
 			return (-1);
 		}
-		ft_print_st(a, b, *tmp, deb);
+		ft_print_st(*a, *b, *tmp, deb);
 		tmp++;
 	}
-	if (b || !ft_is_sorted(&a))
+	if (*b || !ft_is_sorted(a))
 		res = 0;
-	a != NULL ? ft_stack_del(&a) : NULL;
-	b != NULL ? ft_stack_del(&b) : NULL;
-	ft_pstrdel((void **)str);
+	ft_delet(a, b, str);
 	free(str);
 	return (res);
 }

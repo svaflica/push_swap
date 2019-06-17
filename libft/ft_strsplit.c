@@ -5,72 +5,86 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: djeanna <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/15 17:25:32 by djeanna           #+#    #+#             */
-/*   Updated: 2019/06/15 17:26:03 by djeanna          ###   ########.fr       */
+/*   Created: 2019/04/07 12:33:32 by djeanna           #+#    #+#             */
+/*   Updated: 2019/04/08 09:59:07 by djeanna          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_word_count(char *s, char c)
+static int			num_words(char const *s, char c)
 {
+	int check;
 	int res;
-	int mark;
 
 	res = 0;
-	mark = 0;
-	while (*s != '\0')
+	check = 0;
+	while (*s)
 	{
-		if (*s != c && !mark)
+		if ((char)*s != c)
 		{
-			mark = 1;
-			res++;
+			if (!check)
+				res++;
+			check = 1;
 		}
-		else if (*s == c)
-			mark = 0;
+		else
+			check = 0;
 		s++;
 	}
 	return (res);
 }
 
-static int	ft_word_len(char *s, char c)
+static int			len_words(char const *s, char c)
 {
 	int res;
 
-	res = 1;
-	while (*s != c && *s != '\0')
+	res = 0;
+	while ((char)*s != c && *s)
 	{
-		s++;
 		res++;
+		s++;
 	}
 	return (res);
 }
 
-char		**ft_strsplit(char const *s, char c)
+static char const	*cp(char *dst, char const *s, char c)
 {
-	char	**temp;
-	int		i;
-	int		j;
+	int iter;
 
-	i = 0;
-	if (!s)
-		return (NULL);
-	if ((temp = (char**)malloc(8 * (ft_word_count((char*)s, c) + 1))))
+	iter = 0;
+	while ((char)*s != c && *s)
 	{
-		while (*s != '\0')
-		{
-			if ((char)*s != c)
-			{
-				j = 0;
-				if (!(temp[i] = (char*)malloc(ft_word_len((char*)s, c))))
-					return (NULL);
-				while ((char)*s != c && *s != '\0')
-					temp[i][j++] = *s++;
-				temp[i++][j] = '\0';
-			}
-			s = ((char)*s == c && (char)*s != '\0' ? ++s : s);
-		}
-		temp[i] = 0;
+		dst[iter] = *s;
+		iter++;
+		s++;
 	}
-	return (&temp[0]);
+	return (s);
+}
+
+char				**ft_strsplit(char const *s, char c)
+{
+	int		iter;
+	int		iter2;
+	char	**res;
+
+	if (s == NULL)
+		return (NULL);
+	if (!(res = (char **)malloc(sizeof(char *) * (num_words(s, c) + 1))))
+		return (NULL);
+	iter = 0;
+	while (*s)
+	{
+		iter2 = 0;
+		if ((char)*s != c)
+		{
+			if (!(res[iter] = ft_memalloc(len_words(s, c) + 1)))
+				return (NULL);
+			s = cp(res[iter], s, c);
+			iter++;
+		}
+		else
+			s++;
+	}
+	res[iter] = NULL;
+	return (res);
 }

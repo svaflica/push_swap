@@ -12,12 +12,8 @@
 
 #include "../inc/push_swap.h"
 
-int		ft_is_arg_valid(char **arg)
+static int		ft_help(char **tmp, char *tmp2)
 {
-	char **tmp;
-	char *tmp2;
-
-	tmp = arg;
 	while (*tmp)
 	{
 		tmp2 = *tmp;
@@ -42,4 +38,20 @@ int		ft_is_arg_valid(char **arg)
 		tmp++;
 	}
 	return (1);
+}
+
+int				ft_is_arg_valid(char **arg)
+{
+	char **tmp;
+	char *tmp2;
+
+	tmp = arg;
+	return (ft_help(tmp, tmp2));
+}
+
+void			ft_delet(t_stack **a, t_stack **b, char **str)
+{
+	*a != NULL ? ft_stack_del(a) : NULL;
+	*b != NULL ? ft_stack_del(b) : NULL;
+	ft_pstrdel((void **)str);
 }

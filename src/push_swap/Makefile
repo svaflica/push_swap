@@ -13,7 +13,8 @@ SRC = \
 		../ft_stack2.c \
 		ft_sort_helper2.c \
 		sort_helper.c \
-		ft_sort_helper3.c
+		ft_sort_helper3.c \
+		../ft_stack_full.c
 OBJ = $(SRC:.c=.o)
 INC1 = ../../inc
 INC2 = ../../libft

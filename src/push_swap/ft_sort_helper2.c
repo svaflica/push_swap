@@ -54,3 +54,32 @@ int				ft_is_max(t_pair_stack *pe, t_stack *tmp_b, int *who_a)
 		return (max_i);
 	return (-1);
 }
+
+static int		ft_three_med(t_stack *a)
+{
+	if ((a->num > a->next->num && a->num < a->next->next->num) ||
+		(a->num < a->next->num && a->num > a->next->next->num))
+		return (a->num);
+	if ((a->num < a->next->num && a->next->num < a->next->next->num) ||
+		(a->num > a->next->num && a->next->num > a->next->next->num))
+		return (a->next->num);
+	return (a->next->next->num);
+}
+
+static void		ft_two_sort(t_pair_stack *pe, t_stack *tmp, t_stack **sol)
+{
+	if (pe->a->num > pe->a->next->num)
+	{
+		s(pe->a);
+		ft_stack_push_b(sol, ft_stack_new(1));
+	}
+}
+
+void			ft_sort_hel(t_pair_stack *pe, t_stack **sol)
+{
+	t_stack		*tmp;
+
+	if ((tmp = ft_is_srt(pe->a)))
+		pe->size_a == 3 ? ft_three_sort(pe, tmp, sol,
+			ft_three_med(pe->a)) : ft_two_sort(pe, tmp, sol);
+}

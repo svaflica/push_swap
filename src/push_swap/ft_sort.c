@@ -12,17 +12,6 @@
 
 #include "../../inc/push_swap.h"
 
-static int		ft_three_med(t_stack *a)
-{
-	if ((a->num > a->next->num && a->num < a->next->next->num) ||
-		(a->num < a->next->num && a->num > a->next->next->num))
-		return (a->num);
-	if ((a->num < a->next->num && a->next->num < a->next->next->num) ||
-		(a->num > a->next->num && a->next->num > a->next->next->num))
-		return (a->next->num);
-	return (a->next->next->num);
-}
-
 void			ft_pa(t_pair_stack *pe, t_stack **sol)
 {
 	p(&(pe->a), &(pe->b));
@@ -70,13 +59,11 @@ static void		ft_pb(t_pair_stack *pe, t_stack **sol)
 
 void			ft_bitch_sort(t_pair_stack *pe, t_stack **sol)
 {
-	t_stack		*tmp;
 	t_w			w;
 
 	while (ft_is_srt(pe->a) && pe->size_a > 3)
 		ft_pb(pe, sol);
-	if ((tmp = ft_is_srt(pe->a)))
-		ft_three_sort(pe, tmp, sol, ft_three_med(pe->a));
+	ft_sort_hel(pe, sol);
 	while (pe->b)
 		find_who_and_where(pe, &w, sol, INT32_MAX);
 	w.who = ft_is_srt_num(pe->a);

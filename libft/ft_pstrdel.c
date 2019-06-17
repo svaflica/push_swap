@@ -14,10 +14,6 @@
 
 void	*ft_pstrdel(void **ap)
 {
-	/*while (*ap)
-		ft_memdel(ap++);
-	ft_memdel(ap);
-	return (NULL);*/
 	int i;
 
 	i = -1;

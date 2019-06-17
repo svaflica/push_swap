@@ -62,17 +62,21 @@ void				ft_stack_del(t_stack **s);
 void				ft_stacks_print(t_stack *a, t_stack *b);
 int					ft_is_in_stack(t_stack *a, int num);
 t_stack				*ft_stack_last(t_stack *a);
+int					ft_stack_full(t_pair_stack **p, char **v, int c);
 
 int					ft_is_sorted(t_stack **a);
 t_stack				*ft_is_srt(t_stack *a);
 void				ft_three_sort(t_pair_stack *pe, t_stack *tmp,
 									t_stack **sol, int med);
+void				ft_sort_hel(t_pair_stack *pe, t_stack **sol);
 int					ft_is_srt_num(t_stack *a);
+void				ft_delet(t_stack **a, t_stack **b, char **str);
 
 void				ft_sort(t_pair_stack *pe, double med, t_stack **sol);
 void				ft_bitch_sort(t_pair_stack *pe, t_stack **sol);
+int					ft_error_st(t_pair_stack **p);
 
-int					checker(t_stack *a, t_stack *b, char **str, int deb);
+int					checker(t_stack **a, t_stack **b, char **str, int deb);
 int					ft_is_arg_valid(char **arg);
 
 int					ft_check_readed(char *str);

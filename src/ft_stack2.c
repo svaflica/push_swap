@@ -79,3 +79,12 @@ t_stack			*ft_stack_last(t_stack *a)
 		tmp = tmp->next;
 	return (tmp);
 }
+
+int				ft_error_st(t_pair_stack **p)
+{
+	(*p)->a ? ft_stack_del(&((*p)->a)) : NULL;
+	(*p)->b ? ft_stack_del(&((*p)->b)) : NULL;
+	ft_memdel((void **)p);
+	write(1, "Error\n", 6);
+	return (0);
+}
