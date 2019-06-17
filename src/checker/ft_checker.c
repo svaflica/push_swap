@@ -93,6 +93,7 @@ int				checker(t_stack *a, t_stack *b, char **str, int deb)
 			a != NULL ? ft_stack_del(&a) : NULL;
 			b != NULL ? ft_stack_del(&b) : NULL;
 			ft_pstrdel((void **) str);
+			free(str);
 			return (-1);
 		}
 		ft_print_st(a, b, *tmp, deb);
@@ -103,5 +104,6 @@ int				checker(t_stack *a, t_stack *b, char **str, int deb)
 	a != NULL ? ft_stack_del(&a) : NULL;
 	b != NULL ? ft_stack_del(&b) : NULL;
 	ft_pstrdel((void **)str);
+	free(str);
 	return (res);
 }

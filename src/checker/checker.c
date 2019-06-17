@@ -70,6 +70,7 @@ static int		ft_stack_full(t_pair_stack **p, char **v, int c)
 			else
 				ft_stack_push(&((*p)->a), ft_stack_new(cou));
 			ft_skip_ws(v[c], &len);
+			(*p)->size_a++;
 		}
 		if (ft_isdigit(v[c][len]) && (v[c][len + 1] == ' ' || v[c][len + 1] == 0))
 		{
@@ -82,6 +83,7 @@ static int		ft_stack_full(t_pair_stack **p, char **v, int c)
 				return (0);
 			} else
 				ft_stack_push(&((*p)->a), ft_stack_new(cou));
+			(*p)->size_a++;
 		}
 	}
 	return (1);
