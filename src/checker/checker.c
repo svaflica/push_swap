@@ -48,7 +48,7 @@ static char		*ft_hmm(char **v, int *c, int *deb)
 		v += 1;
 		(*c)--;
 	}
-	name = (!name && v[1] ? ft_hmm2(v, deb, c) : NULL);
+	name = (!name && v[1] ? ft_hmm2(v, deb, c) : name);
 	return (name);
 }
 
