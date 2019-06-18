@@ -28,9 +28,13 @@ static int		is_val(char *v, int val)
 			return (1);
 		return (0);
 	}
-	if (*v == '0' && (*(v + 1) == ' ' || *(v + 1) == 0))
-		return (1);
-	return (0);
+	while (*v && *v != ' ')
+	{
+		if (*v != '0')
+			return (0);
+		v++;
+	}
+	return (1);
 }
 
 static void		ft_skip_num(char *v, int *len)
